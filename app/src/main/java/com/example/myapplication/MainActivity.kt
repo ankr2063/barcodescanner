@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         cameraSource = CameraSource.Builder(this, barcodeDetector)
-            .setRequestedPreviewSize(1920, 1080)
+            //.setRequestedPreviewSize(1920, 1080)
             .setAutoFocusEnabled(true) //you should add this feature
             .build()
 
@@ -90,18 +90,10 @@ class MainActivity : AppCompatActivity() {
             override fun receiveDetections(detections: Detections<Barcode>) {
                 val barcodes = detections.detectedItems
                 if (barcodes.size() != 0) {
-                    for()
                     barcodeText!!.post {
-                        if (barcodes.valueAt(0).email != null) {
-                            barcodeText!!.removeCallbacks(null)
-                            barcodeData = barcodes.valueAt(0).email.address
-                            barcodeText!!.text = barcodeData
-                            toneGen1!!.startTone(ToneGenerator.TONE_CDMA_PIP, 150)
-                        } else {
-                            barcodeData = barcodes.valueAt(0).displayValue
-                            barcodeText!!.text = barcodeData
-                            toneGen1!!.startTone(ToneGenerator.TONE_CDMA_PIP, 150)
-                        }
+                        barcodeData = barcodes.valueAt(0).displayValue
+                        barcodeText!!.text = barcodeData
+                        toneGen1!!.startTone(ToneGenerator.TONE_CDMA_PIP, 150)
                     }
                 }
             }
